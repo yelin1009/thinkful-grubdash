@@ -124,19 +124,18 @@ function read(request, response) {
 }
 
 function update(request, response) {
-  const { orderId } = request.params;
-  const foundOrder = orders.find((order) => order.id === orderId);
+  const { order } = response.locals;
 
   const { data: { deliverTo } = {} } = request.body;
   const { data: { mobileNumber } = {} } = request.body;
   const { data: { dishes } = {} } = request.body;
   const { data: { status } = {} } = request.body;
-  foundOrder.deliverTo = deliverTo;
-  foundOrder.mobileNumber = mobileNumber;
-  foundOrder.dishes = dishes;
-  foundOrder.status = status;
+  order.deliverTo = deliverTo;
+  order.mobileNumber = mobileNumber;
+  order.dishes = dishes;
+  order.status = status;
 
-  response.json({ data: foundOrder });
+  response.json({ data: order });
 }
 
 function destroy(request, response) {
